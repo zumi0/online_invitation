@@ -1,6 +1,3 @@
-import dynamic from 'next/dynamic'
-
-
 import { initializeApp, getApps } from 'firebase/app';
 
 // 必要な機能をインポート
@@ -26,11 +23,14 @@ if (!getApps()?.length) {
   initializeApp(firebaseConfig);
 }
 
+let analytics;
+
 if (typeof window !== 'undefined') {
-  getAnalytics();
+  analytics = getAnalytics();
 }
 
 // 他ファイルで使うために機能をエクスポート
+export { analytics };
 export const db = getFirestore();
 export const storage = getStorage();
 export const auth = getAuth();
